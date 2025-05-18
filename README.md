@@ -14,3 +14,4 @@ cd repo
 npm install   # dla projektów JS
 python -m venv venv && source venv/bin/activate  # dla Python
 
+*Dodałem tutaj ten cudowny napis*
