@@ -10,4 +10,7 @@
 
 ## [1.0.1] - PATCH: Poprawka walidacji formularza
 - Naprawiono błąd związany z pustymi polami
+## Nowa funkcjonalność: Autoryzacja użytkownika
+- Umożliwia logowanie użytkowników
+- Sprawdza poprawność hasła
 
