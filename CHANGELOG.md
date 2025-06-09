@@ -14,3 +14,4 @@
 - Umożliwia logowanie użytkowników
 - Sprawdza poprawność hasła
 
+Dodałem to
