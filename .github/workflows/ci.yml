@@ -1,0 +1,31 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout kodu
+      uses: actions/checkout@v3
+
+    - name: Ustaw Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Instalacja zależności
+      run: |
+        pip install -r requirements.txt
+
+    - name: Sprawdzenie jakości kodu
+      run: |
+        flake8 NewCalculator.py
+
+    - name: Uruchomienie testów
+      run: |
+        pytest
+
