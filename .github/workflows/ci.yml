@@ -9,23 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout kodu
+    - name: Sprawdź kod (checkout)
       uses: actions/checkout@v3
 
-    - name: Ustaw Python
+    - name: Pokaż pliki robocze
+      run: ls -la
+
+    - name: Ustaw wersję Pythona
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
-    - name: Instalacja zależności
+    - name: Zainstaluj zależności
       run: |
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Sprawdzenie jakości kodu
+    - name: Sprawdzenie jakości kodu (flake8)
       run: |
         flake8 NewCalculator.py
 
-    - name: Uruchomienie testów
+    - name: Uruchomienie testów (pytest)
       run: |
         pytest
 
