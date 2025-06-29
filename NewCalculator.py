@@ -23,3 +23,4 @@ def kalkulator():
     print(f"Wynik: {wynik}")
 
 kalkulator()
+
