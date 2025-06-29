@@ -24,4 +24,3 @@ def kalkulator():
         print(f"Wynik: {wynik}")
     except ValueError as e:
         print(f"Błąd: {e}")
-
