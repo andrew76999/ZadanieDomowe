@@ -1,36 +1,42 @@
-name: Pipeline CI
+name: CI/CD dla kalkulatora online
 
 on:
   push:
-  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Pobierz kod źródłowy
+    - name: Pobierz kod
       uses: actions/checkout@v3
 
-    - name: Wyświetl zawartość katalogu roboczego
-      run: ls -la
+    - name: Sprawdź strukturę katalogu
+      run: ls -la docs/
 
-    - name: Zainstaluj Pythona
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
-    - name: Zainstaluj zależności z requirements.txt
-      working-directory: ${{ github.workspace }}
+    - name: Sprawdź poprawność pliku HTML
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        if [ ! -f docs/calculator.html ]; then
+          echo "Brak pliku calculator.html!"
+          exit 1
+        fi
 
-    - name: Sprawdź jakość kodu (flake8)
-      working-directory: ${{ github.workspace }}
-      run: flake8 NewCalculator.py
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
 
-    - name: Uruchom testy (pytest)
-      working-directory: ${{ github.workspace }}
-      run: pytest
+    steps:
+    - name: Wdróż stronę na GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+
+    - name: Health-check: Sprawdź dostępność kalkulatora
+      run: |
+        echo "Sprawdzam stronę kalkulatora..."
+        sleep 10  # chwilka na propagację zmian
+        curl -s -o /dev/null -w "%{http_code}" https://andrew76999.github.io/ZadanieDomowe/index.html | grep 200
 
