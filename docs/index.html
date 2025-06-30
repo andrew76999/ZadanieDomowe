@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Mój Blog</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fafafa;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        article {
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        .date {
-            color: #888;
-            font-size: 0.9em;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Kalkulator online</title>
+  <style>
+    body { font-family: Arial; margin: 50px; }
+    input, select { margin: 5px; padding: 5px; width: 80px; }
+    button { padding: 8px 12px; }
+    #result { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Mój osobisty blog</h1>
-        <p>Witaj na mojej stronie!</p>
-    </header>
+  <h1>Kalkulator online</h1>
+  <input type="number" id="a" placeholder="Liczba 1" />
+  <select id="op">
+    <option value="+">+</option>
+    <option value="-">−</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+  </select>
+  <input type="number" id="b" placeholder="Liczba 2" />
+  <button onclick="calculate()">Policz</button>
 
-    <article>
-        <h2>Moja pierwsza notatka</h2>
-        <p class="date">29 czerwca 2025</p>
-        <p>Dziś rozpocząłem pisanie mojego pierwszego bloga. To ekscytujące uczucie dzielić się swoimi przemyśleniami z całym światem!</p>
-    </article>
+  <div id="result"></div>
 
-    <article>
-        <h2>Pomysły na przyszłość</h2>
-        <p class="date">28 czerwca 2025</p>
-        <p>Planuję pisać o programowaniu, podróżach i codziennych refleksjach. Mam nadzieję, że znajdziesz tu coś inspirującego!</p>
-    </article>
+  <script>
+    function calculate() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+      const op = document.getElementById("op").value;
+      let result = "";
+
+      if (isNaN(a) || isNaN(b)) {
+        result = "Wprowadź dwie liczby!";
+      } else if (op === "/" && b === 0) {
+        result = "Nie można dzielić przez zero!";
+      } else {
+        switch (op) {
+          case "+": result = a + b; break;
+          case "-": result = a - b; break;
+          case "*": result = a * b; break;
+          case "/": result = a / b; break;
+        }
+        result = "Wynik: " + result;
+      }
+
+      document.getElementById("result").textContent = result;
+    }
+  </script>
 </body>
 </html>
 
