@@ -1,42 +1,49 @@
-name: CI/CD dla kalkulatora online
+name: CI/CD z rollbackiem
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Pobierz kod
+    - name: Checkout kodu
       uses: actions/checkout@v3
 
-    - name: Sprawdź strukturę katalogu
-      run: ls -la docs/
-
-    - name: Sprawdź poprawność pliku HTML
-      run: |
-        if [ ! -f docs/calculator.html ]; then
-          echo "Brak pliku calculator.html!"
-          exit 1
-        fi
+    - name: Sprawdź czy plik index.html istnieje
+      run: test -f docs/index.html
 
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Wdróż stronę na GitHub Pages
+    - name: Wdróż na GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
 
-    - name: Health-check: Sprawdź dostępność kalkulatora
+    - name: Health-check strony
+      id: healthcheck
+      continue-on-error: true
       run: |
-        echo "Sprawdzam stronę kalkulatora..."
-        sleep 10  # chwilka na propagację zmian
-        curl -s -o /dev/null -w "%{http_code}" https://andrew76999.github.io/ZadanieDomowe/index.html | grep 200
+        echo "Czekam na publikację..."
+        sleep 10
+        curl -s -o /dev/null -w "%{http_code}" https://andrew76999.github.io/ZadanieDomowe/ | grep 200
+
+    - name: Rollback — cofnięcie commita jeśli health-check nie przejdzie
+      if: steps.healthcheck.outcome == 'failure'
+      run: |
+        git config --global user.email "ci-bot@github.com"
+        git config --global user.name "GitHub Actions"
+        git checkout main
+        git revert HEAD --no-edit
+        git push origin main
 
