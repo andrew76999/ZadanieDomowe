@@ -1,83 +1,36 @@
-name: CI/CD Pipeline
+name: Pipeline CI
 
 on:
   push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout kodu
+    - name: Pobierz kod źródłowy
       uses: actions/checkout@v3
 
-    - name: Debug – pokaż zawartość katalogu
+    - name: Wyświetl zawartość katalogu roboczego
       run: ls -la
 
-    - name: Ustaw wersję Pythona
+    - name: Zainstaluj Pythona
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
-    - name: Instalacja zależności
+    - name: Zainstaluj zależności z requirements.txt
       working-directory: ${{ github.workspace }}
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Sprawdzenie jakości kodu (flake8)
+    - name: Sprawdź jakość kodu (flake8)
       working-directory: ${{ github.workspace }}
       run: flake8 NewCalculator.py
 
-    - name: Uruchomienie testów (pytest)
+    - name: Uruchom testy (pytest)
       working-directory: ${{ github.workspace }}
       run: pytest
-
-  deploy:
-    name: Wdrożenie aplikacji
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: ${{ success() }}
-
-    steps:
-    - name: Deploy przez SSH
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        script: |
-          echo "Backup starej wersji"
-          cp -r /var/www/app /var/www/app_backup_$(date +%s)
-
-          echo "Wdrażanie nowej wersji"
-          rm -rf /var/www/app
-          mkdir -p /var/www/app
-          # W tym miejscu należałoby wcześniej wypchnąć kod (np. przez rsync lub scp)
-          # Albo zrobić git pull, jeśli serwer ma dostęp do repo
-
-          echo "Restart serwisu"
-          systemctl restart kalkulator.service
-
-    - name: Health-check aplikacji
-      run: |
-        curl -f http://your-server-url/health || exit 1
-
-    - name: Rollback (w razie błędu health-check)
-      if: failure()
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USER }}
-        key: ${{ secrets.DEPLOY_KEY }}
-        script: |
-          echo "ROLLBACK: przywracanie poprzedniej wersji"
-          rm -rf /var/www/app
-          mv /var/www/app_backup_* /var/www/app
-          systemctl restart kalkulator.service
 
