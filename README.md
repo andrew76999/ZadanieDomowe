@@ -98,9 +98,9 @@ ZadanieDomowe/
 │
 ├── docs/                         # Strona frontendowa kalkulatora – publikowana na GitHub Pages
 │   ├── index.html                # Główna strona kalkulatora
-│   └── config.js                 # "Zmienna środowiskowa" w stylu frontendowym
+│   └── config.js                 # Zmienna środowiskowa
 │
-├── tests/                        # Folder testów – np. dla `NewCalculator.py`
+├── tests/                        # Folder testów – np. dla NewCalculator.py
 │
 ├── .gitignore                    # Ignorowane pliki przez Git
 ├── blog.html                     # Osobna strona bloga (nieużywana w Pages)
@@ -113,5 +113,4 @@ ZadanieDomowe/
 └── requirements.txt              # Lista zależności Pythona (dla testów/backendu)
 
 
-
-Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT
+# Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT
