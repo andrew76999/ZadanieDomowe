@@ -2,7 +2,8 @@
 
 Mój projekt to prosty frontendowy kalkulator stworzony w HTML, CSS i JavaScript. Hostowany jako statyczna strona na GitHub Pages i zarządzany automatycznie za pomocą GitHub Actions (CI/CD).
 
-## Podsumowanie laboratoriów
+## Użyte technologie i narzędzia
+W projekcie wykorzystałem technologie frontendowe: HTML, CSS i JavaScript, tworząc w pełni statyczną aplikację działającą w przeglądarce. Do automatyzacji wdrożeń i monitorowania użyłem GitHub Actions, konfigurując workflow CI/CD z health-checkiem i mechanizmem rollback. Strona została opublikowana za pomocą GitHub Pages, co umożliwiło łatwe i darmowe hostowanie bez potrzeby posiadania serwera backendowego.
 
 ### Laboratorium 1
 
@@ -89,6 +90,8 @@ window.APP_CONFIG = {
 };
 ZadanieDomowe/
 
+---
+
 ## Struktura projektu
 ZadanieDomowe/
 ├── .git/                         # Folder kontroli wersji Git (niewidoczny w repo online)
@@ -113,4 +116,4 @@ ZadanieDomowe/
 └── requirements.txt              # Lista zależności Pythona (dla testów/backendu)
 
 ---
-# Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT
+** Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT**
