@@ -106,12 +106,9 @@ ZadanieDomowe/
 ├── tests/                        # Folder testów – np. dla NewCalculator.py
 │
 ├── .gitignore                    # Ignorowane pliki przez Git
-├── blog.html                     # Osobna strona bloga (nieużywana w Pages)
-├── calculator.py                 # Prosta wersja kalkulatora w Pythonie
 ├── CHANGELOG.md                  # Historia wersji/projektu
 ├── CONTRIBUTING.md               # Zasady współpracy (np. dla contributorów)
 ├── LICENSE                       # Plik licencji projektu
-├── NewCalculator.py              # Główna wersja kalkulatora w Pythonie
 ├── README.md                     # Dokumentacja – opis projektu, deploy, workflow itp.
 └── requirements.txt              # Lista zależności Pythona (dla testów/backendu)
 
