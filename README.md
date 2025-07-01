@@ -112,5 +112,5 @@ ZadanieDomowe/
 ├── README.md                     # Dokumentacja – opis projektu, deploy, workflow itp.
 └── requirements.txt              # Lista zależności Pythona (dla testów/backendu)
 
-
+---
 # Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT
