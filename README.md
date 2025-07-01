@@ -43,7 +43,7 @@ Nauczyłem się:
 ## Sprawdź strone
 
  [Zobacz online](https://andrew76999.github.io/ZadanieDomowe/)
-
+https://stats.uptimerobot.com/t2kgdBWVki
 ---
 
 ##  Deployment
