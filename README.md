@@ -2,9 +2,6 @@
 
 Mój projekt to prosty frontendowy kalkulator stworzony w HTML, CSS i JavaScript. Hostowany jako statyczna strona na GitHub Pages i zarządzany automatycznie za pomocą GitHub Actions (CI/CD).
 
-## Użyte technologie i narzędzia
-W projekcie wykorzystałem technologie frontendowe: HTML, CSS i JavaScript, tworząc w pełni statyczną aplikację działającą w przeglądarce. Do automatyzacji wdrożeń i monitorowania użyłem GitHub Actions, konfigurując workflow CI/CD z health-checkiem i mechanizmem rollback. Strona została opublikowana za pomocą GitHub Pages, co umożliwiło łatwe i darmowe hostowanie bez potrzeby posiadania serwera backendowego.
-
 ### Laboratorium 1
 
 Nauczyłem się:
@@ -36,21 +33,58 @@ Nauczyłem się:
 - aktualizować dokumentację (`README.md`) oraz opisywać konfigurację i procesy wdrażania.
 
 
+## Użyte technologie i narzędzia
+W projekcie wykorzystałem technologie frontendowe: HTML, CSS i JavaScript, tworząc w pełni statyczną aplikację działającą w przeglądarce. Do automatyzacji wdrożeń i monitorowania użyłem GitHub Actions, konfigurując workflow CI/CD z health-checkiem i mechanizmem rollback. Strona została opublikowana za pomocą GitHub Pages, co umożliwiło łatwe i darmowe hostowanie bez potrzeby posiadania serwera backendowego.
 
-
----
-
-## Sprawdź strone
+## Deployment
 
  [Zobacz online](https://andrew76999.github.io/ZadanieDomowe/)
 
----
+
+## Health Check online
+
 https://stats.uptimerobot.com/t2kgdBWVki
+
 ---
 
-##  Deployment
+## Struktura projektu
 
-Strona działa na GitHub Pages przy wykorzystaniu folderu `docs/`.
+.git - folder Git przechowujący metadane repozytorium 
+
+.github - konfiguracja GitHub, workflow
+
+ci-cd.yml - plik workflow GitHub Actions: deploy, health-check, rollback
+
+docs/ - folder publikowany jako strona na GitHub Pages
+
+index.html - główna strona kalkulatora
+
+config.js - konfiguracja aplikacji (wersja, motyw itd.)
+
+tests/ - folder przeznaczony na testy projektu
+
+.gitignore - pliki i katalogi ignorowane przez Git
+
+CHANGELOG.md  - historia zmian i wersji
+
+CONTRIBUTING.md - zasady współpracy z repozytorium
+
+LICENSE  - plik licencji projektu
+
+README.md - dokumentacja projektu, instrukcje uruchamiania i wdrażania
+
+---
+
+##  Lokalne użycie projektu
+
+Strona działa na GitHub Pages przy wykorzystaniu folderu docs/ oraz .github/workflows
+
+Wystarczy pobrać repozytorium i otworzyć plik index.html
+
+git clone https://github.com/andrew76999/ZadanieDomowe.git
+
+cd ZadanieDomowe/docs
+
 
 ### Jak wdrożyć nową wersję:
 
@@ -79,40 +113,4 @@ Pipeline składa się z 2 głównych etapów:
 Używa tokenu `GITHUB_TOKEN` (wbudowanego w GitHub) do uwierzytelnienia.
 
 ---
-
-##  Konfiguracja aplikacji (`config.js`)
-
-Aplikacja korzysta z zewnętrznego pliku konfiguracyjnego w stylu "zmiennych środowiskowych":
-
-```js
-window.APP_CONFIG = {
-  version: "1.0.2",
-  maintainer: "Andrii",
-  theme: "light"
-};
-ZadanieDomowe/
-
----
-
-## Struktura projektu
-ZadanieDomowe/
-├── .git/                         # Folder kontroli wersji Git (niewidoczny w repo online)
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml             # GitHub Actions – CI/CD + deploy + health-check + rollback
-│
-├── docs/                         # Strona frontendowa kalkulatora – publikowana na GitHub Pages
-│   ├── index.html                # Główna strona kalkulatora
-│   └── config.js                 # Zmienna środowiskowa
-│
-├── tests/                        # Folder testów – np. dla NewCalculator.py
-│
-├── .gitignore                    # Ignorowane pliki przez Git
-├── CHANGELOG.md                  # Historia wersji/projektu
-├── CONTRIBUTING.md               # Zasady współpracy (np. dla contributorów)
-├── LICENSE                       # Plik licencji projektu
-├── README.md                     # Dokumentacja – opis projektu, deploy, workflow itp.
-└── requirements.txt              # Lista zależności Pythona (dla testów/backendu)
-
----
-** Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT**
+## Autor Andrii Perevertailo Wersja aplikacji: 1.0.2 Licencja: MIT
