@@ -3,15 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <title>Kalkulator online</title>
+
+  <!-- Konfiguracja aplikacji -->
+  <script src="config.js"></script>
+
   <style>
-    body { font-family: Arial; margin: 50px; }
+    body { font-family: Arial, sans-serif; margin: 50px; }
     input, select { margin: 5px; padding: 5px; width: 80px; }
-    button { padding: 8px 12px; }
+    button { padding: 8px 12px; cursor: pointer; }
     #result { margin-top: 15px; font-size: 1.2em; font-weight: bold; }
+    footer { margin-top: 40px; font-size: 0.9em; color: #666; }
   </style>
 </head>
 <body>
-  <h1>Kalkulator online</h1>
+  <h1 id="page-title">Kalkulator</h1>
+
   <input type="number" id="a" placeholder="Liczba 1" />
   <select id="op">
     <option value="+">+</option>
@@ -24,7 +30,15 @@
 
   <div id="result"></div>
 
+  <footer id="meta-info"></footer>
+
   <script>
+    // Ustawianie danych z config.js
+    document.title = "Kalkulator — v" + window.APP_CONFIG.version;
+    document.getElementById("page-title").textContent += " v" + window.APP_CONFIG.version;
+    document.getElementById("meta-info").textContent =
+      "Autor: " + window.APP_CONFIG.maintainer + " | Wersja: " + window.APP_CONFIG.version + " | Motyw: " + window.APP_CONFIG.theme;
+
     function calculate() {
       const a = parseFloat(document.getElementById("a").value);
       const b = parseFloat(document.getElementById("b").value);
